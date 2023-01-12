@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/epos-eu/EPOS-DCAT-AP:
+      branch: EPOS-DCAT-AP-shapes
+      repo: https://github.com/epos-eu/EPOS-DCAT-AP
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/epos-eu/EPOS-DCAT-AP git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-cinnamon-wolf.sh
+        container: qc.acc_cozy-rust-pinscher
+  QC.Doc:
+    repos:
+      github.com/epos-eu/EPOS-DCAT-AP find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-crimson-ostrich.sh
+        container: qc.doc_sleepy-charcoal-dormouse
+      github.com/epos-eu/EPOS-DCAT-AP git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-eggplant-bombay.sh
+        container: qc.doc_wiggy-chocolate-warthog
+      github.com/epos-eu/EPOS-DCAT-AP markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-plum-havanese.sh
+        container: qc.doc_cozy-orange-capuchin
+  QC.Lic:
+    repos:
+      github.com/epos-eu/EPOS-DCAT-AP licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-cream-baboon.sh
+        container: qc.lic_skimpy-platinum-pinscher
+  QC.Sec:
+    repos:
+      github.com/epos-eu/EPOS-DCAT-AP bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.snoopy-fuchsia-grouse.sh
+        container: qc.sec_homely-buff-dodo
+  QC.Sty:
+    repos:
+      github.com/epos-eu/EPOS-DCAT-AP flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-flax-jaguar.sh
+        container: qc.sty_clammy-blue-butterfly
+  QC.Ver:
+    repos:
+      github.com/epos-eu/EPOS-DCAT-AP get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-firebrick-penguin.sh
+        container: qc.ver_droopy-cerulean-hyrax
+timeout: 5400
